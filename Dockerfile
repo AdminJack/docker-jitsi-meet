@@ -10,15 +10,12 @@ RUN apt-get update && \
 	apt-get -y --allow-unauthenticated install jitsi-meet && \
 	apt-get clean
 
-ENV PUBLIC_HOSTNAME=localhost
-ENV LOCAL_IP_ADDRESS=127.0.0.1
-ENV PUBLIC_IP_ADDRESS=8.8.8.8
 
 #/etc/jitsi/meet/localhost-config.js = bosh: '//localhost/http-bind',
-RUN sed s/JVB_HOSTNAME=/JVB_HOSTNAME=$PUBLIC_HOSTNAME/ -i /etc/jitsi/videobridge/config && \
-	sed s/JICOFO_HOSTNAME=/JICOFO_HOSTNAME=$PUBLIC_HOSTNAME/ -i /etc/jitsi/jicofo/config
+RUN sed s/JVB_HOSTNAME=/JVB_HOSTNAME=$VIRTUAL_HOST/ -i /etc/jitsi/videobridge/config && \
+	sed s/JICOFO_HOSTNAME=/JICOFO_HOSTNAME=$VIRTUAL_HOST/ -i /etc/jitsi/jicofo/config
 	
-RUN echo 'org.ice4j.ice.harvest.NAT_HARVESTER_LOCAL_ADDRESS=$LOCAL_IP_ADDRESS' \ 
+RUN echo 'org.ice4j.ice.harvest.NAT_HARVESTER_LOCAL_ADDRESS=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)' \ 
 		>> /etc/jitsi/videobridge/sip-communicator.properties && \
 	echo 'org.ice4j.ice.harvest.NAT_HARVESTER_PUBLIC_ADDRESS=$PUBLIC_IP_ADDRESS' \ 
 		>> /etc/jitsi/videobridge/sip-communicator.properties
