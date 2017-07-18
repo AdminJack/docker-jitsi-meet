@@ -7,7 +7,7 @@ RUN apt-get update && \
 	echo 'deb http://download.jitsi.org/nightly/deb unstable/' >> /etc/apt/sources.list && \
 	wget -qO - https://download.jitsi.org/nightly/deb/unstable/archive.key | apt-key add - && \
 	apt-get update && \
-	apt-get -y install jitsi-meet && \
+	apt-get -y --allow-unauthenticated install jitsi-meet && \
 	apt-get clean
 
 ENV PUBLIC_HOSTNAME=localhost
