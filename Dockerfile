@@ -1,5 +1,4 @@
 FROM debian:latest
-MAINTAINER Roberto Andrade <roberto@cloud.com>
 ENV DEBIAN_FRONTEND noninteractive
 ENV TERM xterm
 
@@ -24,8 +23,7 @@ RUN echo 'org.ice4j.ice.harvest.NAT_HARVESTER_LOCAL_ADDRESS=$LOCAL_IP_ADDRESS' \
 	echo 'org.ice4j.ice.harvest.NAT_HARVESTER_PUBLIC_ADDRESS=$PUBLIC_IP_ADDRESS' \ 
 		>> /etc/jitsi/videobridge/sip-communicator.properties
 
-EXPOSE 80 443 5347 4443
-EXPOSE 10000/udp 10001/udp 10002/udp 10003/udp 10004/udp 10005/udp 10006/udp 10007/udp 10008/udp 10009/udp 10010/udp
+EXPOSE 80 443 5347 4443 10000-10020/udp
 
 COPY run.sh /run.sh
 CMD /run.sh
