@@ -14,7 +14,7 @@ ENV PUBLIC_HOSTNAME=localhost
 ENV LOCAL_IP_ADDRESS=127.0.0.1
 ENV PUBLIC_IP_ADDRESS=8.8.8.8
 
-/etc/jitsi/meet/localhost-config.js = bosh: '//localhost/http-bind',
+#/etc/jitsi/meet/localhost-config.js = bosh: '//localhost/http-bind',
 RUN sed s/JVB_HOSTNAME=/JVB_HOSTNAME=$PUBLIC_HOSTNAME/ -i /etc/jitsi/videobridge/config && \
 	sed s/JICOFO_HOSTNAME=/JICOFO_HOSTNAME=$PUBLIC_HOSTNAME/ -i /etc/jitsi/jicofo/config
 	
