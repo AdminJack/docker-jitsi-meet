@@ -9,7 +9,7 @@ Docker container for [jitsi-meet][3]
 
   - [Docker][2]
 
-To install docker in Ubuntu 14.04 use the commands:
+To install docker in Ubuntu 16.04 use the commands:
 
     $ sudo apt-get update
     $ sudo apt-get install docker.io
